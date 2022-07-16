@@ -8,15 +8,6 @@ import command.*
         -r Revert
  */
 
-fun findCommand(commands: Array<ICommand>,name: String): ICommand? {
-    for (command in commands) {
-        if (command.name() == name) {
-            return command
-        }
-    }
-    return null
-}
-
 fun main(args: Array<String>) {
     if (args.isEmpty()) {
         println("Usage:\n\tfileshaft mess -r" +
@@ -25,10 +16,10 @@ fun main(args: Array<String>) {
         return
     }
 
+    val commands = Commands()
     val commandName = args[0]
-    val commands = arrayOf(Mess(), Time())
 
-    val command = findCommand(commands, commandName)
+    val command = commands.find(commandName)
     if (command == null) {
         println("No command found named $commandName")
         return
