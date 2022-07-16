@@ -1,5 +1,6 @@
 package command
 
+import logging.Logger
 import storage.ChangeList
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -8,7 +9,7 @@ import kotlin.io.path.isRegularFile
 import kotlin.random.Random
 
 class Mess : ICommand {
-    private val changeListFileName get() = Paths.get(".mess.old")
+    private val changeListFileName get() = Paths.get("./.mess.old")
     private val defaultValue = 16286684454590L
     private var value = 0L
 
@@ -31,6 +32,7 @@ class Mess : ICommand {
 
             changeList.add(formatted, file)
             Files.move(file, formatted)
+            Logger.log("$file -> $formatted")
         }
 
         changeList.write()

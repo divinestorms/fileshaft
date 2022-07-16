@@ -1,5 +1,6 @@
 package command
 
+import logging.Logger
 import storage.ChangeList
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -11,7 +12,7 @@ import kotlin.io.path.isRegularFile
 import kotlin.io.path.nameWithoutExtension
 
 class Time : ICommand {
-    private val changeListFileName get() = Paths.get(".time.old")
+    private val changeListFileName get() = Paths.get("./.time.old")
     override fun name(): String = "pics"
 
     override fun apply() {
@@ -40,6 +41,7 @@ class Time : ICommand {
 
                 changeList.add(formatted, file)
                 Files.move(file, formatted)
+                Logger.log("$file -> $formatted")
             } catch (e: DateTimeParseException) {
                 println("${e.message}: $file")
             }
