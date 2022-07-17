@@ -2,7 +2,7 @@
 Program that helping me to manage pictures in archive
 
 ## Requirements
-Program require JRE 1.8
+Program require JRE 1.8 (Java SE 8)
 
 ## Running
 Download stable release from "Releases" page.
