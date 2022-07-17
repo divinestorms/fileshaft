@@ -1,12 +1,12 @@
 package command
 
-class Commands {
-    private val commands = arrayOf(Mess(), Time())
+import command.base.*
 
-    fun find(name: String): ICommand? {
-        for (command in commands)
-            if (command.name() == name)
-                return command
-        return null
+class Commands {
+    companion object {
+        private val commands = arrayOf(Mess(), Time())
+
+        fun find(name: String): Command? = commands.firstOrNull { it.name == name }
     }
+
 }
