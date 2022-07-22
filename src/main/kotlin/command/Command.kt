@@ -7,6 +7,7 @@ import java.nio.file.Path
 import kotlin.io.path.extension
 import kotlin.io.path.isDirectory
 import kotlin.io.path.isRegularFile
+import kotlin.streams.toList
 
 abstract class Command {
     abstract val name: String
@@ -14,7 +15,7 @@ abstract class Command {
     abstract val filter: (Path) -> Boolean
 
     fun apply(path: Path) {
-        val files = Files.list(path).filter { file -> filter(file) }.toList() ?: return
+        val files = Files.list(path).filter { file -> filter(file) }.toList()
 
         if (files.isEmpty())
             Logger.critical("No files given in path $path", -2)
