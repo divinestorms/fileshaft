@@ -14,9 +14,7 @@ java -jar ./fileshaft <?command> <?path>
 
 ## Commands
 All commands works with pictures. 
-Before renaming pictures, program makes backup with timestamp in name.
-
-Example of backup directory name: `!stamp__01-01-2020_12-12-40`
+Before renaming pictures, program makes one step changelog
 
 ### Mess
 Rename to unique hash string.
@@ -39,4 +37,12 @@ fileshaft time <?path>
 
 #### Example
 Picture `IMG_2000_01_01--12_12_40.jpg` becomes `2000-01-01 12_12_40.jpg`
+
+### Revert
+Reverting last changes (.fileshaft.json should be present in current path)
+
+#### Usage
+```shell
+fileshaft revert
+```
 

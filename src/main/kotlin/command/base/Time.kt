@@ -1,6 +1,7 @@
 package command.base
 
 import command.Command
+import file.FileUtil
 import logging.Logger
 import java.nio.file.Path
 import java.time.LocalDateTime
@@ -11,7 +12,7 @@ import kotlin.io.path.nameWithoutExtension
 
 class Time : Command() {
     override val name: String = "time"
-    override val filter: (Path) -> Boolean get() = { file -> isPicture(file) }
+    override val filter: (Path) -> Boolean get() = { file -> FileUtil.isPicture(file) }
 
     override val handler
         get() =

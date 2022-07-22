@@ -6,13 +6,14 @@ plugins {
 }
 
 group = "org.example"
-version = "v2"
+version = "v3"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation("com.alibaba:fastjson:2.0.7")
     testImplementation(kotlin("test"))
 }
 

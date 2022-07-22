@@ -1,6 +1,8 @@
 package command.base
 
 import command.Command
+import file.FileUtil
+
 import java.nio.file.Path
 import java.util.*
 import kotlin.io.path.extension
@@ -13,7 +15,7 @@ class Mess : Command() { // 12 symbols
 
             return@path file.resolveSibling(fileName)
         }
-    override val filter: (Path) -> Boolean get() = { file -> isPicture(file) }
+    override val filter: (Path) -> Boolean get() = { file -> FileUtil.isPicture(file) }
 
 
     private val hashLength = 13

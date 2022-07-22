@@ -1,15 +1,14 @@
 package command
 
+import history.History
 import logging.Logger
-import storage.makeStamp
 import java.nio.file.Files
 import java.nio.file.Path
-import kotlin.io.path.extension
-import kotlin.io.path.isDirectory
-import kotlin.io.path.isRegularFile
+import java.nio.file.StandardCopyOption
 import kotlin.streams.toList
 
 abstract class Command {
+    private val history = History()
     abstract val name: String
     abstract val handler: (file: Path) -> Path? // Last argument for new filename
     abstract val filter: (Path) -> Boolean
@@ -20,21 +19,13 @@ abstract class Command {
         if (files.isEmpty())
             Logger.critical("No files given in path $path", -2)
 
-        makeStamp(path)
-
         for (file in files) {
-            val newFileName = handler(file) ?: continue
+            val newName = handler(file) ?: continue
 
-            Files.move(file, newFileName)
-            Logger.log("$file -> $newFileName")
+            history.add(file, newName)
+            Files.move(file, newName, StandardCopyOption.REPLACE_EXISTING)
+            Logger.log("$file -> $newName")
         }
-    }
-
-    protected fun isPicture(file: Path): Boolean {
-        return file.isRegularFile() && !file.isDirectory() && (
-                file.extension == "png" ||
-                file.extension == "jpg" ||
-                file.extension == "jpeg" ||
-                file.extension == "gif")
+        history.save()
     }
 }
