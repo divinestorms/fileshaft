@@ -1,7 +1,6 @@
 package input
 
 import command.Command
-import command.Commands
 import logging.Logger
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -15,7 +14,7 @@ class Input {
                 else -> Paths.get(".")
             }
 
-            val command = Commands.find(commandName)
+            val command = Command.resolveFromString(commandName)
             if (command == null) {
                 Logger.critical("No command found named $commandName", -1)
             }

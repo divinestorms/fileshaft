@@ -7,13 +7,14 @@ import java.nio.file.Path
 import java.nio.file.StandardCopyOption
 import kotlin.streams.toList
 
+const val pkg = "command.base"
 abstract class Command {
-    private val history = History()
+    protected val history = History()
     abstract val name: String
     abstract val handler: (file: Path) -> Path? // Last argument for new filename
     abstract val filter: (Path) -> Boolean
 
-    fun apply(path: Path) {
+    open fun apply(path: Path) {
         val files = Files.list(path).filter { file -> filter(file) }.toList()
 
         if (files.isEmpty())
@@ -28,4 +29,13 @@ abstract class Command {
         }
         history.save()
     }
+
+    companion object {
+        fun resolveFromString(commandName: String): Command? {
+            val commandClass = Class.forName("$pkg.${commandName.replaceFirstChar { it.uppercase() }}").kotlin
+
+            return commandClass.java.getDeclaredConstructor().newInstance() as Command?
+        }
+    }
+
 }

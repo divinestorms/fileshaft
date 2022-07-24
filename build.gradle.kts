@@ -5,7 +5,7 @@ plugins {
     application
 }
 
-group = "org.example"
+group = "com.shinshila"
 version = "v3"
 
 repositories {
@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation("com.alibaba:fastjson:2.0.7")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
     testImplementation(kotlin("test"))
 }
 
