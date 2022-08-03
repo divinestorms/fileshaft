@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.shinshila"
-version = "v3"
+version = "v4"
 
 repositories {
     mavenCentral()
@@ -15,9 +15,8 @@ repositories {
 dependencies {
     implementation("com.alibaba:fastjson:2.0.7")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
-    testImplementation(kotlin("test"))
+    implementation("org.sejda.imageio:webp-imageio:0.1.6")
 }
-
 tasks.test {
     useJUnitPlatform()
 }

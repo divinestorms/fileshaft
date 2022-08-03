@@ -1,7 +1,7 @@
 package command.base
 
 import command.Command
-import file.FileUtil
+import file.MimeType
 
 import java.nio.file.Path
 import java.util.*
@@ -15,7 +15,7 @@ class Mess : Command() { // 12 symbols
 
             return@path file.resolveSibling(fileName)
         }
-    override val filter: (Path) -> Boolean get() = { file -> FileUtil.isPicture(file) }
+    override val filter: (Path) -> Boolean get() = { file -> MimeType.isPicture(file) }
 
 
     private val hashLength = 13
